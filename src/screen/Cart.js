@@ -14,7 +14,7 @@ import { Ionicons } from "@expo/vector-icons";
 // android and ios Screen measuring heights
 const windowHeight = Dimensions.get("window").height;
 
-const EmptyPasket = ({ onPress }) => (
+const EmptyBasket = ({ onPress }) => (
   <View style={styles.container}>
     <TouchableOpacity style={{ marginTop: 55, left: 30 }} onPress={onPress}>
       <Ionicons name="chevron-back-circle" size={40} color="red" />
@@ -26,13 +26,13 @@ const EmptyPasket = ({ onPress }) => (
         textAlign: "center",
       }}
     >
-      Pasket Empty {""}
+      Basket Empty {""}
       back to shopping
     </Text>
   </View>
 );
 
-const UnEmptyPasket = ({ title, src, price, onPress }) => {
+const UnEmptyBasket = ({ title, src, price, onPress }) => {
   return (
     <ScrollView>
       <TouchableOpacity
@@ -63,9 +63,9 @@ const Cart = ({ route, navigation }) => {
     <SafeAreaView>
       <View style={styles.container}>
         {route.params?.title === undefined ? (
-          <EmptyPasket onPress={() => navigation.navigate("Home")} />
+          <EmptyBasket onPress={() => navigation.navigate("Home")} />
         ) : (
-          <UnEmptyPasket
+          <UnEmptyBasket
             onPress={() => navigation.navigate("Home")}
             title={route.params?.title}
             src={route.params?.src}
