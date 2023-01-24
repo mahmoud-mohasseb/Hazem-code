@@ -5,7 +5,7 @@ import Container from "./src/navigation/Container";
 import store from "./src/store/store";
 import { View } from "react-native";
 import { useFonts } from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
+// import * as SplashScreen from "expo-splash-screen";
 
 // SplashScreen.preventAutoHideAsync();
 

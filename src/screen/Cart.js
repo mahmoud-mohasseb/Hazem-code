@@ -62,7 +62,9 @@ const Cart = ({ route, navigation }) => {
   return (
     <SafeAreaView>
       <View style={styles.container}>
-        {route.params?.title === undefined ? (
+        {route.params?.title === undefined &&
+        route.params?.src === undefined &&
+        route.params?.price === undefined ? (
           <EmptyBasket onPress={() => navigation.navigate("Home")} />
         ) : (
           <UnEmptyBasket

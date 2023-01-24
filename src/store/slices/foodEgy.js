@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { egypt } from "../data/egy";
+import { createSlice } from "@reduxjs/toolkit";
+import { egypt } from "../../data/egy";
 
 export const foodEgy = createSlice({
   name: "egy",
