@@ -9,9 +9,24 @@ import {
 import React from "react";
 import { Icon, Text } from "@rneui/themed";
 import { Ionicons } from "@expo/vector-icons";
+import { cartActions } from "../store/slices/cartSlice";
+import { useDispatch } from "react-redux";
 
 const Foods = ({ route, navigation }) => {
   let { id, price, title, src, description } = route.params;
+
+  const dispatch = useDispatch();
+
+  // const addToCart = () => {
+  //   dispatch(
+  //     cartActions.addItem({
+  //       id,
+  //       title,
+  //       src,
+  //       price,
+  //     })
+  //   );
+  // };
 
   return (
     <SafeAreaView>
@@ -40,13 +55,7 @@ const Foods = ({ route, navigation }) => {
           </Text>
           <TouchableOpacity
             style={styles.btn}
-            onPress={() =>
-              navigation.navigate("Cart", {
-                src: src,
-                title: title,
-                price: price,
-              })
-            }
+            // onPress={addToCart}
           >
             <Icon name="shopping-cart" size={25} color="#fff" />
             <Text h5 style={styles.textBtn}>

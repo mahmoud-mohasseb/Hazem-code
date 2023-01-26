@@ -1,13 +1,10 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import foodEgy from "./slices/foodEgy";
-import foodKsaSlice from "./slices/foodKsa";
-import foodSyrSlice from "./slices/foodSyr";
+
+import cartSlice from "./slices/cartSlice";
 
 const store = configureStore({
   reducer: {
-    egy: foodEgy,
-    ksa: foodKsaSlice,
-    syr: foodSyrSlice,
+    cart: cartSlice.reducer,
   },
 });
 export default store;

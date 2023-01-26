@@ -5,9 +5,13 @@ import Container from "./src/navigation/Container";
 import store from "./src/store/store";
 import { View } from "react-native";
 import { useFonts } from "expo-font";
-// import * as SplashScreen from "expo-splash-screen";
+import { LogBox } from "react-native";
 
-// SplashScreen.preventAutoHideAsync();
+// Ignore log notification by message:
+LogBox.ignoreLogs(["Warning: ..."]);
+
+// Ignore all log notifications:
+LogBox.ignoreAllLogs();
 
 const App = () => {
   const [loaded] = useFonts({
