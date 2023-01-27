@@ -1,12 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { createSlice, combineReducers } from "@reduxjs/toolkit";
 
 const cartSlice = createSlice({
   name: "cart",
-  initialState: {},
+  initialState: [],
 
-  reducers: {},
+  reducers: {
+    addToCart: (state, action) => {
+      state.push(action.payload);
+    },
+    removeFromCart: (state, action) => {
+      const index = state.indexOf(action.payload);
+      state.splice(index, 1);
+    },
+  },
 });
 
 export const cartActions = cartSlice.actions;
-export default cartSlice;
+export default cartSlice.reducer;

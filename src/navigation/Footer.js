@@ -44,14 +44,14 @@ const Footer = () => {
           );
         },
         headerShown: false,
-        // tabBarShowLabel: false,
+        tabBarShowLabel: false,
         tabBarStyle: {
           position: "absolute",
           backgroundColor: "#D5CEA3",
           paddingBottom: 4,
           left: 60,
           right: 60,
-          bottom: 50,
+          bottom: 40,
           borderRadius: 30,
           height: 60,
         },
@@ -68,7 +68,7 @@ const Footer = () => {
           headerTintColor: "#f00",
           headerTitleStyle: {
             fontWeight: "bold",
-            // textAlign: "center",
+            textAlign: "center",
             fontSize: 30,
           },
         }}

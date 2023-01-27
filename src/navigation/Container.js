@@ -6,9 +6,6 @@ import Cover from "../content/cover";
 // import Logo from "../content/Logo";
 import Cart from "../screen/Cart";
 import Foods from "../screen/Foods";
-import Home from "../screen/Home";
-import Personal from "../screen/Personal";
-import Prudact from "../screen/Prudact";
 import Footer from "./Footer";
 
 import { color } from "@rneui/base";

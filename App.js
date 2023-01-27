@@ -1,12 +1,12 @@
-import React, { useCallback } from "react";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import { Provider } from "react-redux";
+import React from "react";
 import Container from "./src/navigation/Container";
-import store from "./src/store/store";
-import { View } from "react-native";
 import { useFonts } from "expo-font";
 import { LogBox } from "react-native";
 
+// redux
+import { store } from "./src/store/store";
+
+import { Provider } from "react-redux";
 // Ignore log notification by message:
 LogBox.ignoreLogs(["Warning: ..."]);
 

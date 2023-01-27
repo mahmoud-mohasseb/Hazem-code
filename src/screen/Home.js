@@ -51,26 +51,24 @@ const Home = ({ navigation }) => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View>
-        <Ionicons
-          style={{ left: 30 }}
-          name="chevron-back-circle"
-          size={40}
-          color="red"
-          onPress={() => navigation.navigate("Cover")}
-        />
+      <Ionicons
+        style={{ left: 30 }}
+        name="chevron-back-circle"
+        size={40}
+        color="red"
+        onPress={() => navigation.navigate("Cover")}
+      />
 
-        <FlatList
-          data={allProducts}
-          renderItem={({ item }) => (
-            <View>
-              <Text style={styles.title}>{item.title}</Text>
-              <Categories Data={item.data} />
-            </View>
-          )}
-          keyExtractor={(item) => item.id}
-        />
-      </View>
+      <FlatList
+        data={allProducts}
+        renderItem={({ item }) => (
+          <View>
+            <Text style={styles.title}>{item.title}</Text>
+            <Categories Data={item.data} />
+          </View>
+        )}
+        keyExtractor={(item) => item.id}
+      />
     </SafeAreaView>
   );
 };
@@ -80,7 +78,6 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     // flex: 1,
-    // direction: "rtl",
   },
   item: {
     marginHorizontal: 4,

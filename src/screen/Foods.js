@@ -6,27 +6,21 @@ import {
   View,
   SafeAreaView,
 } from "react-native";
-import React from "react";
+import React, { useEffect } from "react";
 import { Icon, Text } from "@rneui/themed";
 import { Ionicons } from "@expo/vector-icons";
-import { cartActions } from "../store/slices/cartSlice";
+// redux
 import { useDispatch } from "react-redux";
+import { cartActions } from "../store/slices/cartSlice";
 
 const Foods = ({ route, navigation }) => {
-  let { id, price, title, src, description } = route.params;
-
   const dispatch = useDispatch();
+  const { id, price, title, src, description } = route.params;
 
-  // const addToCart = () => {
-  //   dispatch(
-  //     cartActions.addItem({
-  //       id,
-  //       title,
-  //       src,
-  //       price,
-  //     })
-  //   );
-  // };
+  function handleAddToCart(item) {
+    dispatch(cartActions.addToCart(item));
+    navigation.navigate("Cart");
+  }
 
   return (
     <SafeAreaView>
@@ -55,7 +49,15 @@ const Foods = ({ route, navigation }) => {
           </Text>
           <TouchableOpacity
             style={styles.btn}
-            // onPress={addToCart}
+            onPress={() =>
+              handleAddToCart({
+                id: id,
+                price: price,
+                title: title,
+                src: src,
+                description: description,
+              })
+            }
           >
             <Icon name="shopping-cart" size={25} color="#fff" />
             <Text h5 style={styles.textBtn}>
@@ -74,8 +76,6 @@ export default Foods;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // direction: "rtl",
-    // justifyContent: "space-between",
     alignItems: "center",
   },
   img: {

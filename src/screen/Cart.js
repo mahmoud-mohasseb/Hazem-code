@@ -11,6 +11,9 @@ import {
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 
+// redux
+import { useSelector } from "react-redux";
+
 // android and ios Screen measuring heights
 const windowHeight = Dimensions.get("window").height;
 
@@ -59,19 +62,32 @@ const UnEmptyBasket = ({ title, src, price, onPress }) => {
 };
 
 const Cart = ({ route, navigation }) => {
+  const cart = useSelector((state) => state.cart);
+
+  // function handleRemoveFromCart(item) {
+  //   dispatch(removeFromCart(item));
+  // }
+
   return (
     <SafeAreaView>
       <View style={styles.container}>
-        {route.params?.title === undefined &&
-        route.params?.src === undefined &&
-        route.params?.price === undefined ? (
+        {cart[0]?.title === undefined &&
+        cart[0]?.src === undefined &&
+        cart[0]?.title === undefined ? (
+          // route.params?.title === undefined &&
+          // route.params?.src === undefined &&
+          // route.params?.price === undefined
+
           <EmptyBasket onPress={() => navigation.navigate("Home")} />
         ) : (
           <UnEmptyBasket
             onPress={() => navigation.navigate("Home")}
-            title={route.params?.title}
-            src={route.params?.src}
-            price={route.params?.price}
+            title={cart[0]?.title}
+            src={cart[0]?.src}
+            price={cart[0]?.price}
+            // title={route.params?.title}
+            // src={route.params?.src}
+            // price={route.params?.price}
           />
         )}
       </View>
