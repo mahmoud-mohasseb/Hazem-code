@@ -1,12 +1,12 @@
-import { createSlice, combineReducers } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const cartSlice = createSlice({
   name: "cart",
   initialState: [],
 
   reducers: {
-    addToCart: (state, action) => {
-      state.push(action.payload);
+    addToCart: (state = initialState, action) => {
+      return [...state, action.payload];
     },
     removeFromCart: (state, action) => {
       const index = state.indexOf(action.payload);

@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   Dimensions,
   TouchableOpacity,
+  FlatList,
 } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
@@ -22,6 +23,7 @@ const EmptyBasket = ({ onPress }) => (
     <TouchableOpacity style={{ marginTop: 55, left: 30 }} onPress={onPress}>
       <Ionicons name="chevron-back-circle" size={40} color="red" />
     </TouchableOpacity>
+
     <Text
       style={{
         top: 20,
@@ -29,37 +31,11 @@ const EmptyBasket = ({ onPress }) => (
         textAlign: "center",
       }}
     >
-      Basket Empty {""}
-      back to shopping
+      Basket Empty
+      {""} back to shopping {""}
     </Text>
   </View>
 );
-
-const UnEmptyBasket = ({ title, src, price, onPress }) => {
-  return (
-    <ScrollView>
-      <TouchableOpacity
-        onPress={onPress}
-        style={{ position: "absolute", zIndex: 1, marginTop: 70, left: 20 }}
-      >
-        <Ionicons name="chevron-back-circle" size={40} color="red" />
-      </TouchableOpacity>
-      <View
-        style={{
-          flexDirection: "row",
-          marginTop: 20,
-          justifyContent: "space-between",
-        }}
-      >
-        <Image source={src} style={styles.img} />
-        <View style={styles.card}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.title}>{price}</Text>
-        </View>
-      </View>
-    </ScrollView>
-  );
-};
 
 const Cart = ({ route, navigation }) => {
   const cart = useSelector((state) => state.cart);
@@ -71,24 +47,41 @@ const Cart = ({ route, navigation }) => {
   return (
     <SafeAreaView>
       <View style={styles.container}>
-        {cart[0]?.title === undefined &&
-        cart[0]?.src === undefined &&
-        cart[0]?.title === undefined ? (
-          // route.params?.title === undefined &&
-          // route.params?.src === undefined &&
-          // route.params?.price === undefined
-
+        {cart.length === 0 ? (
           <EmptyBasket onPress={() => navigation.navigate("Home")} />
         ) : (
-          <UnEmptyBasket
-            onPress={() => navigation.navigate("Home")}
-            title={cart[0]?.title}
-            src={cart[0]?.src}
-            price={cart[0]?.price}
-            // title={route.params?.title}
-            // src={route.params?.src}
-            // price={route.params?.price}
-          />
+          <View>
+            <TouchableOpacity
+              onPress={() => navigation.navigate("Home")}
+              style={{
+                position: "absolute",
+                zIndex: 1,
+                marginTop: 70,
+                left: 20,
+              }}
+            >
+              <Ionicons name="chevron-back-circle" size={40} color="red" />
+            </TouchableOpacity>
+            <FlatList
+              data={cart}
+              renderItem={({ item }) => (
+                <View
+                  style={{
+                    flexDirection: "row",
+                    marginTop: 20,
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Image source={item.src} style={styles.img} />
+                  <View style={styles.card}>
+                    <Text style={styles.title}>{item.title}</Text>
+                    <Text style={styles.title}>{item.price}</Text>
+                  </View>
+                </View>
+              )}
+              keyExtractor={(item) => item.id}
+            />
+          </View>
         )}
       </View>
     </SafeAreaView>

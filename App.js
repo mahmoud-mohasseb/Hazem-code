@@ -4,9 +4,12 @@ import { useFonts } from "expo-font";
 import { LogBox } from "react-native";
 
 // redux
-import { store } from "./src/store/store";
-
 import { Provider } from "react-redux";
+
+// redux-persist
+import { persistor, store } from "./src/store/store";
+import { PersistGate } from "redux-persist/integration/react";
+
 // Ignore log notification by message:
 LogBox.ignoreLogs(["Warning: ..."]);
 
@@ -28,7 +31,9 @@ const App = () => {
 
   return (
     <Provider store={store}>
-      <Container />
+      <PersistGate loading={null} persistor={persistor}>
+        <Container />
+      </PersistGate>
     </Provider>
   );
 };

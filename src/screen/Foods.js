@@ -9,6 +9,7 @@ import {
 import React, { useEffect } from "react";
 import { Icon, Text } from "@rneui/themed";
 import { Ionicons } from "@expo/vector-icons";
+
 // redux
 import { useDispatch } from "react-redux";
 import { cartActions } from "../store/slices/cartSlice";
@@ -34,6 +35,7 @@ const Foods = ({ route, navigation }) => {
           onPress={() => navigation.navigate("Home")}
         />
       </View>
+
       <ScrollView>
         <View style={styles.container}>
           <Image source={src} style={styles.img} />

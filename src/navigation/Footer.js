@@ -5,10 +5,13 @@ import Prudact from "../screen/Prudact";
 import Cart from "../screen/Cart";
 import Personal from "../screen/Personal";
 import { Icon } from "@rneui/themed";
+import { useSelector } from "react-redux";
 
 const Tab = createBottomTabNavigator();
 
 const Footer = () => {
+  const cart = useSelector((state) => state.cart);
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -59,7 +62,14 @@ const Footer = () => {
     >
       <Tab.Screen name="Home" component={Home} options={{ title: "" }} />
       <Tab.Screen name="Prudact" component={Prudact} options={{ title: "" }} />
-      <Tab.Screen name="Cart" component={Cart} options={{ title: "" }} />
+      <Tab.Screen
+        name="Cart"
+        component={Cart}
+        options={{
+          title: "",
+          tabBarBadge: cart.length !== 0 ? cart.length : 0,
+        }}
+      />
       <Tab.Screen
         name="Personal"
         component={Personal}
