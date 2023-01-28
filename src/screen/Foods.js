@@ -2,19 +2,21 @@ import {
   Image,
   ScrollView,
   StyleSheet,
-  TouchableOpacity,
   View,
   SafeAreaView,
 } from "react-native";
-import React, { useEffect } from "react";
-import { Icon, Text } from "@rneui/themed";
-import { Ionicons } from "@expo/vector-icons";
+import React from "react";
 
 // redux
 import { useDispatch } from "react-redux";
 import { cartActions } from "../store/slices/cartSlice";
 
+// react native elements
+import { Ionicons } from "@expo/vector-icons";
+import { Text, useTheme, Icon, Button } from "@rneui/themed";
+
 const Foods = ({ route, navigation }) => {
+  const { theme } = useTheme();
   const dispatch = useDispatch();
   const { id, price, title, src, description } = route.params;
 
@@ -24,7 +26,7 @@ const Foods = ({ route, navigation }) => {
   }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ backgroundColor: theme.colors.background }}>
       <View
         style={{ position: "absolute", zIndex: 1, marginTop: 70, left: 20 }}
       >
@@ -39,18 +41,25 @@ const Foods = ({ route, navigation }) => {
       <ScrollView>
         <View style={styles.container}>
           <Image source={src} style={styles.img} />
-          <Text h3 style={styles.title}>
-            {title}
+          <Text style={styles.title}>{title}</Text>
+          <Text h4 h4Style={{ color: theme?.colors?.warning }}>
+            طريقه تحظيره{" "}
           </Text>
-          <Text h4>طريقه تحظيره </Text>
-          <Text h5 style={styles.discription}>
+          <Text
+            h4
+            h4Style={{ color: theme?.colors?.warning }}
+            style={styles.discription}
+          >
             {description}
           </Text>
           <Text h4 style={styles.price}>
             {price}: جينه{" "}
           </Text>
-          <TouchableOpacity
-            style={styles.btn}
+          {/* react native elements */}
+          <Button
+            color="error"
+            size="lg"
+            radius="20"
             onPress={() =>
               handleAddToCart({
                 id: id,
@@ -66,7 +75,7 @@ const Foods = ({ route, navigation }) => {
               {" "}
               اضف الي السله{" "}
             </Text>
-          </TouchableOpacity>
+          </Button>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -90,12 +99,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   title: {
-    color: "#f00",
     marginBottom: 20,
     fontSize: 50,
     fontFamily: "Arsalan-font",
   },
   discription: {
+    textAlign: "center",
     marginBottom: 20,
     marginTop: 20,
   },

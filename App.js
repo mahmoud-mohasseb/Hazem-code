@@ -5,10 +5,12 @@ import { LogBox } from "react-native";
 
 // redux
 import { Provider } from "react-redux";
-
+import { ThemeProvider } from "@rneui/themed";
 // redux-persist
 import { persistor, store } from "./src/store/store";
 import { PersistGate } from "redux-persist/integration/react";
+// react native element
+import theme from "./src/theme";
 
 // Ignore log notification by message:
 LogBox.ignoreLogs(["Warning: ..."]);
@@ -32,7 +34,9 @@ const App = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <Container />
+        <ThemeProvider theme={theme}>
+          <Container />
+        </ThemeProvider>
       </PersistGate>
     </Provider>
   );

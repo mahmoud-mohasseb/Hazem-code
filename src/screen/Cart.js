@@ -1,8 +1,6 @@
 import {
-  Image,
   ScrollView,
   StyleSheet,
-  Text,
   View,
   SafeAreaView,
   Dimensions,
@@ -11,7 +9,8 @@ import {
 } from "react-native";
 import React from "react";
 import { Ionicons, AntDesign } from "@expo/vector-icons";
-
+// themeing
+import { Text, useTheme, Card, Image } from "@rneui/themed";
 // redux
 import { useSelector, useDispatch } from "react-redux";
 import { cartActions } from "../store/slices/cartSlice";
@@ -20,15 +19,16 @@ import { cartActions } from "../store/slices/cartSlice";
 const windowHeight = Dimensions.get("window").height;
 
 const EmptyBasket = ({ onPress }) => (
-  <View style={styles.container}>
+  <View>
     <TouchableOpacity style={{ marginTop: 55, left: 30 }} onPress={onPress}>
       <Ionicons name="chevron-back-circle" size={40} color="red" />
     </TouchableOpacity>
 
     <Text
       style={{
-        top: 20,
+        // top: 20,
         fontSize: 40,
+        // color: "red",
         textAlign: "center",
       }}
     >
@@ -39,6 +39,7 @@ const EmptyBasket = ({ onPress }) => (
 );
 
 const Cart = ({ route, navigation }) => {
+  const { theme } = useTheme();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
 
@@ -47,7 +48,9 @@ const Cart = ({ route, navigation }) => {
   }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView
+      style={{ backgroundColor: theme.colors.background, height: windowHeight }}
+    >
       <View>
         {cart.length === 0 ? (
           <EmptyBasket onPress={() => navigation.navigate("Home")} />
@@ -65,39 +68,38 @@ const Cart = ({ route, navigation }) => {
               <Ionicons name="chevron-back-circle" size={40} color="red" />
             </TouchableOpacity>
             <FlatList
-              style={{ height: windowHeight / 1.2, marginTop: 70 }}
               data={cart}
               renderItem={({ item }) => (
-                <View
-                  style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                    margin: 10,
-                    borderRadius: 10,
-                    backgroundColor: "black",
-                  }}
-                >
-                  <TouchableOpacity
-                    onPress={() =>
-                      handleRemoveFromCart({
-                        id: item.id,
-                      })
-                    }
-                    style={{
-                      position: "absolute",
-                      zIndex: 1,
-                      marginTop: 10,
-                      right: 20,
-                    }}
-                  >
-                    <AntDesign name="closecircleo" size={24} color="white" />
-                  </TouchableOpacity>
+                <Card containerStyle={{ borderRadius: 40 }}>
                   <Image source={item.src} style={styles.img} />
+                  <Card.Divider />
                   <View style={styles.card}>
-                    <Text style={styles.title}>{item.title}</Text>
-                    <Text style={styles.title}>{item.price}</Text>
+                    <Card.Title style={{ fontSize: 20 }}>
+                      {item.title}
+                    </Card.Title>
+                    <Text h5 style={styles.title}>
+                      {item.price}
+                    </Text>
+                    <TouchableOpacity
+                      onPress={() =>
+                        handleRemoveFromCart({
+                          id: item.id,
+                        })
+                      }
+                      style={{
+                        position: "absolute",
+                        zIndex: 1,
+                        right: 20,
+                      }}
+                    >
+                      <AntDesign
+                        name="delete"
+                        size={20}
+                        color={theme.mode === "light" ? "black" : "red"}
+                      />
+                    </TouchableOpacity>
                   </View>
-                </View>
+                </Card>
               )}
               keyExtractor={(item) => item.id}
             />
@@ -112,13 +114,14 @@ export default Cart;
 
 const styles = StyleSheet.create({
   img: {
-    width: "50%",
+    width: "100%",
     height: 200,
     borderRadius: 15,
   },
   card: {
     justifyContent: "space-evenly",
     alignItems: "center",
+    flexDirection: "row",
   },
   title: {
     color: "#f00",

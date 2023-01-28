@@ -1,21 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   Dimensions,
   StyleSheet,
   View,
   FlatList,
-  Text,
   Image,
   TouchableOpacity,
+  Platform,
+  TextInput,
 } from "react-native";
 import Products from "../data/Products.js";
 import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useTheme, Button, Text } from "@rneui/themed";
+
+import { Entypo } from "@expo/vector-icons";
 
 const windowHeight = Dimensions.get("window").height;
 
 const Home = ({ navigation }) => {
   const [allProducts, setAllProducts] = useState(Products);
+
+  const { updateTheme, theme } = useTheme();
+
+  // toogle dark mode react native elements
+  const toggleTheme = () => {
+    updateTheme((theme) => ({
+      mode: theme.mode === "light" ? "dark" : "light",
+    }));
+  };
 
   const Item = ({ item }) => (
     <TouchableOpacity
@@ -31,7 +44,14 @@ const Home = ({ navigation }) => {
       }
     >
       <Image source={item.src} style={styles.img} />
-      <Text style={styles.subtitle}>{item.title}</Text>
+
+      <Text
+        h4
+        h4Style={{ color: theme?.colors?.warning }}
+        style={styles.subtitle}
+      >
+        {item.title}
+      </Text>
     </TouchableOpacity>
   );
 
@@ -49,20 +69,42 @@ const Home = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
-      <Ionicons
-        style={{ left: 30 }}
-        name="chevron-back-circle"
-        size={40}
-        color="red"
-        onPress={() => navigation.navigate("Cover")}
-      />
+    <SafeAreaView
+      // style={styles.container}
+      style={{ backgroundColor: theme.colors.background }}
+      // backgroundColor={theme.mode === "light" ? "black" : "white"}
+    >
+      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <TouchableOpacity onPress={() => navigation.navigate("Cover")}>
+          <Ionicons
+            style={{ left: 30 }}
+            name="chevron-back-circle"
+            size={40}
+            color="red"
+          />
+        </TouchableOpacity>
+        {/*  */}
+        <Entypo
+          style={{ right: 50 }}
+          name="light-down"
+          size={40}
+          // style={{ backgroundColor: theme.colors.background }}
+          color={theme.mode === "light" ? "black" : "red"}
+          onPress={toggleTheme}
+        />
+      </View>
 
       <FlatList
         data={allProducts}
         renderItem={({ item }) => (
           <View>
-            <Text style={styles.title}>{item.title}</Text>
+            <Text
+              h1
+              h1Style={{ color: theme?.colors?.warning }}
+              style={styles.title}
+            >
+              {item.title}
+            </Text>
             <Categories Data={item.data} />
           </View>
         )}
@@ -77,6 +119,8 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     // flex: 1,
+    // top: 30,
+    // backgroundColor: "transparent",
   },
   item: {
     marginHorizontal: 4,
@@ -84,7 +128,7 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: "Arsalan-font",
     fontSize: 50,
-    color: "#DC0000",
+    // color: "#DC0000",
     textAlign: "center",
   },
   subtitle: {
@@ -96,5 +140,13 @@ const styles = StyleSheet.create({
     height: 200,
     borderBottomRightRadius: 30,
     borderTopLeftRadius: 30,
+  },
+  input: {
+    width: 250,
+    left: 50,
+    height: 44,
+    padding: 10,
+    borderRadius: 20,
+    backgroundColor: "#e8e8e8",
   },
 });
