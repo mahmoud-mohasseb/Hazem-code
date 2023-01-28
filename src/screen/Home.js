@@ -12,7 +12,7 @@ import {
 import Products from "../data/Products.js";
 import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useTheme, Button, Text } from "@rneui/themed";
+import { useTheme, Text } from "@rneui/themed";
 
 import { Entypo } from "@expo/vector-icons";
 
@@ -58,7 +58,7 @@ const Home = ({ navigation }) => {
   const Categories = ({ Data }) => {
     return (
       <FlatList
-        style={{ marginBottom: 30 }}
+        style={{ marginBottom: 15 }}
         horizontal
         showsHorizontalScrollIndicator={false}
         data={Data}
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     // backgroundColor: "transparent",
   },
   item: {
-    marginHorizontal: 4,
+    marginHorizontal: 5,
   },
   title: {
     fontFamily: "Arsalan-font",
@@ -138,8 +138,9 @@ const styles = StyleSheet.create({
   img: {
     width: 150,
     height: 200,
-    borderBottomRightRadius: 30,
-    borderTopLeftRadius: 30,
+    borderRadius: 15,
+    // borderBottomRightRadius: 30,
+    // borderTopLeftRadius: 30,
   },
   input: {
     width: 250,

@@ -6,10 +6,13 @@ import Cart from "../screen/Cart";
 import Personal from "../screen/Personal";
 import { Icon } from "@rneui/themed";
 import { useSelector } from "react-redux";
+// themeing
+import { useTheme } from "@rneui/themed";
 
 const Tab = createBottomTabNavigator();
 
 const Footer = () => {
+  const { theme } = useTheme();
   const cart = useSelector((state) => state.cart);
 
   return (
@@ -49,14 +52,15 @@ const Footer = () => {
         headerShown: false,
         tabBarShowLabel: false,
         tabBarStyle: {
-          position: "absolute",
-          backgroundColor: "#D5CEA3",
+          backgroundColor: theme.colors.background,
+          // position: "absolute",
+          // backgroundColor: "#D5CEA3",
           paddingBottom: 4,
-          left: 60,
-          right: 60,
-          bottom: 40,
-          borderRadius: 30,
-          height: 60,
+          // left: 60,
+          // right: 60,
+          // bottom: 40,
+          // borderRadius: 30,
+          // height: 60,
         },
       })}
     >

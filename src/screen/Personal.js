@@ -6,13 +6,20 @@ import {
   Text,
   View,
   SafeAreaView,
+  Dimensions,
 } from "react-native";
 import React from "react";
 import { Icon } from "@rneui/themed";
+import { useTheme } from "@rneui/themed";
+
+const windowHeight = Dimensions.get("window").height;
 
 const Personal = () => {
+  const { theme } = useTheme();
   return (
-    <SafeAreaView>
+    <SafeAreaView
+      style={{ backgroundColor: theme.colors.background, height: windowHeight }}
+    >
       <ScrollView>
         <View style={styles.container}>
           <Image source={require("../img/3.jpg")} style={styles.img} />
