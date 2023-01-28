@@ -9,8 +9,10 @@ const cartSlice = createSlice({
       return [...state, action.payload];
     },
     removeFromCart: (state, action) => {
-      const index = state.indexOf(action.payload);
-      state.splice(index, 1);
+      return [...state.filter((item) => item.id !== action.payload.id)];
+
+      // const index = state.indexOf(action.payload);
+      // state.splice(index, 1);
     },
   },
 });

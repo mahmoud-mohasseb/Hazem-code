@@ -10,10 +10,11 @@ import {
   FlatList,
 } from "react-native";
 import React from "react";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, AntDesign } from "@expo/vector-icons";
 
 // redux
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { cartActions } from "../store/slices/cartSlice";
 
 // android and ios Screen measuring heights
 const windowHeight = Dimensions.get("window").height;
@@ -38,11 +39,12 @@ const EmptyBasket = ({ onPress }) => (
 );
 
 const Cart = ({ route, navigation }) => {
+  const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
 
-  // function handleRemoveFromCart(item) {
-  //   dispatch(removeFromCart(item));
-  // }
+  function handleRemoveFromCart(item) {
+    dispatch(cartActions.removeFromCart(item));
+  }
 
   return (
     <SafeAreaView>
@@ -70,8 +72,27 @@ const Cart = ({ route, navigation }) => {
                     flexDirection: "row",
                     marginTop: 20,
                     justifyContent: "space-between",
+                    margin: 10,
+                    borderRadius: 10,
+                    backgroundColor: "black",
                   }}
                 >
+                  <TouchableOpacity
+                    // onPress={() => console.log(item.id)}
+                    onPress={() =>
+                      handleRemoveFromCart({
+                        id: item.id,
+                      })
+                    }
+                    style={{
+                      position: "absolute",
+                      zIndex: 1,
+                      marginTop: 10,
+                      right: 20,
+                    }}
+                  >
+                    <AntDesign name="closecircleo" size={24} color="white" />
+                  </TouchableOpacity>
                   <Image source={item.src} style={styles.img} />
                   <View style={styles.card}>
                     <Text style={styles.title}>{item.title}</Text>
@@ -92,8 +113,8 @@ export default Cart;
 
 const styles = StyleSheet.create({
   container: {
-    height: windowHeight / 1.2,
-    // flex: 3,
+    // height: windowHeight / 1.2,
+    // flex: 1,
     // direction: "rtl",
   },
   img: {
