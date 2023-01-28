@@ -48,7 +48,7 @@ const Cart = ({ route, navigation }) => {
 
   return (
     <SafeAreaView>
-      <View style={styles.container}>
+      <View>
         {cart.length === 0 ? (
           <EmptyBasket onPress={() => navigation.navigate("Home")} />
         ) : (
@@ -58,19 +58,19 @@ const Cart = ({ route, navigation }) => {
               style={{
                 position: "absolute",
                 zIndex: 1,
-                marginTop: 70,
+                marginTop: 20,
                 left: 20,
               }}
             >
               <Ionicons name="chevron-back-circle" size={40} color="red" />
             </TouchableOpacity>
             <FlatList
+              style={{ height: windowHeight / 1.2, marginTop: 70 }}
               data={cart}
               renderItem={({ item }) => (
                 <View
                   style={{
                     flexDirection: "row",
-                    marginTop: 20,
                     justifyContent: "space-between",
                     margin: 10,
                     borderRadius: 10,
@@ -78,7 +78,6 @@ const Cart = ({ route, navigation }) => {
                   }}
                 >
                   <TouchableOpacity
-                    // onPress={() => console.log(item.id)}
                     onPress={() =>
                       handleRemoveFromCart({
                         id: item.id,
@@ -112,11 +111,6 @@ const Cart = ({ route, navigation }) => {
 export default Cart;
 
 const styles = StyleSheet.create({
-  container: {
-    // height: windowHeight / 1.2,
-    // flex: 1,
-    // direction: "rtl",
-  },
   img: {
     width: "50%",
     height: 200,
