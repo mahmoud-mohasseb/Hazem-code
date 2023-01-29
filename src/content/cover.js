@@ -30,14 +30,15 @@ const Cover = ({ navigation }) => {
             onPress={() => navigation.navigate("Footer")}
             size="lg"
             buttonStyle={{
+              fontFamily: "Arsalan-font",
               backgroundColor: "#DC0000",
               borderRadius: 30,
               padding: 10,
             }}
             titleStyle={{
-              fontWeight: "bold",
-              fontSize: 40,
               fontFamily: "Arsalan-font",
+              // fontWeight: "bold",
+              fontSize: 40,
             }}
           />
         </View>
@@ -58,17 +59,16 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: "Arsalan-font",
+    fontFamily: "Arsalan-font",
     position: "absolute",
     color: "black",
-    fontWeight: "bold",
     fontSize: 70,
     textAlign: "center",
     marginTop: 200,
   },
   title2: {
-    color: "#00092C",
-    fontWeight: "bold",
     fontFamily: "Arsalan-font",
+    color: "#00092C",
     position: "absolute",
     fontSize: 100,
     textAlign: "center",

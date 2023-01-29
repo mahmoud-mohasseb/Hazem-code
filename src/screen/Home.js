@@ -99,8 +99,8 @@ const Home = ({ navigation }) => {
         renderItem={({ item }) => (
           <View>
             <Text
-              h1
-              h1Style={{ color: theme?.colors?.warning }}
+              // h1
+              // h1Style={{ color: theme?.colors?.warning }}
               style={styles.title}
             >
               {item.title}
@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: "Arsalan-font",
     fontSize: 50,
-    // color: "#DC0000",
+    color: "#DC0000",
     textAlign: "center",
   },
   subtitle: {

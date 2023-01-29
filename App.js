@@ -1,6 +1,8 @@
 import React from "react";
 import Container from "./src/navigation/Container";
 import { useFonts } from "expo-font";
+// import { Font, AppLoading } from "expo";
+
 import { LogBox } from "react-native";
 
 // redux
