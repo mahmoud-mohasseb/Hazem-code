@@ -13,21 +13,37 @@ import Products from "../data/Products.js";
 import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme, Text } from "@rneui/themed";
-
 import { Entypo } from "@expo/vector-icons";
 
 const windowHeight = Dimensions.get("window").height;
 
 const Home = ({ navigation }) => {
-  const [allProducts, setAllProducts] = useState(Products);
+  const [search, setSearch] = useState("");
+  const [masterDataSource, setMasterDataSource] = useState(Products);
 
   const { updateTheme, theme } = useTheme();
 
-  // toogle dark mode react native elements
   const toggleTheme = () => {
     updateTheme((theme) => ({
       mode: theme.mode === "light" ? "dark" : "light",
     }));
+  };
+
+  const searchFilterFunction = (text) => {
+    if (text) {
+      const newData = masterDataSource.filter((item) => {
+        const itemData = item.title
+          ? item.title.toUpperCase()
+          : "".toUpperCase();
+        const textData = text.toUpperCase();
+        return itemData.indexOf(textData) > -1;
+      });
+      setMasterDataSource(newData);
+      setSearch(text);
+    } else {
+      setMasterDataSource(Products);
+      setSearch(text);
+    }
   };
 
   const Item = ({ item }) => (
@@ -47,7 +63,9 @@ const Home = ({ navigation }) => {
 
       <Text
         h4
-        h4Style={{ color: theme?.colors?.warning }}
+        h4Style={{
+          color: theme.mode && theme?.colors?.warning,
+        }}
         style={styles.subtitle}
       >
         {item.title}
@@ -84,6 +102,14 @@ const Home = ({ navigation }) => {
           />
         </TouchableOpacity>
         {/*  */}
+        <TextInput
+          style={styles.textInputStyle}
+          onChangeText={(text) => searchFilterFunction(text)}
+          value={search}
+          underlineColorAndroid="transparent"
+          placeholder="Search Here"
+        />
+        {/*  */}
         <Entypo
           style={{ right: 50 }}
           name="light-down"
@@ -95,16 +121,10 @@ const Home = ({ navigation }) => {
       </View>
 
       <FlatList
-        data={allProducts}
+        data={masterDataSource}
         renderItem={({ item }) => (
           <View>
-            <Text
-              // h1
-              // h1Style={{ color: theme?.colors?.warning }}
-              style={styles.title}
-            >
-              {item.title}
-            </Text>
+            <Text style={styles.title}>{item.title}</Text>
             <Categories Data={item.data} />
           </View>
         )}
@@ -142,12 +162,14 @@ const styles = StyleSheet.create({
     // borderBottomRightRadius: 30,
     // borderTopLeftRadius: 30,
   },
-  input: {
-    width: 250,
-    left: 50,
-    height: 44,
-    padding: 10,
+  textInputStyle: {
+    height: 40,
+    width: 240,
+    borderWidth: 1,
+    paddingLeft: 20,
+    // margin: 5,
+    borderColor: "red",
     borderRadius: 20,
-    backgroundColor: "#e8e8e8",
+    backgroundColor: "#FFFFFF",
   },
 });

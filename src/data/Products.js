@@ -115,7 +115,7 @@ const Products = [
     ],
   },
   {
-    title: "وجبات syrian",
+    title: "وجبات سوري",
     data: [
       //   syr
       {
@@ -157,7 +157,7 @@ const Products = [
       {
         id: 16,
         src: require("../img/syr/1.jpg"),
-        title: " المبرومة ",
+        title: "المبرومة",
         price: 190,
         category: "syr",
         description:
